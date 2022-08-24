@@ -1,9 +1,11 @@
-FROM golang:1.15
+FROM golang:1.10
 
-WORKDIR /app
+WORKDIR $GOPATH/src/github.com/codefresh-contrib/go-sample-app
 
 COPY . .
 
-RUN go build -o math
+RUN go get -d -v ./...
 
-CMD ["./math"]
+RUN go install -v ./...
+
+CMD ["go-sample-app"]
